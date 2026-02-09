@@ -5,6 +5,7 @@ import Join from './pages/member/Join'
 import './reset.css'
 import { BiBook } from 'react-icons/bi'
 import BookList from './pages/book/BookList'
+import Login from './pages/member/Login'
 
 function App() {
 
@@ -23,8 +24,11 @@ function App() {
           {/* 도서 목록 페이지, URL : localhost:5173 */}
           <Route path='' element={ <BookList/> }/>
 
-          {/* 회원가입페이지, URL : localhost:5173/join */}
+          {/* 회원 가입 페이지, URL : localhost:5173/join */}
           <Route path='join' element={ <Join /> }/>
+
+          {/* 로그인 페이지, URL : localhost:5173/login */}
+          <Route path='login' element={ <Login /> }/>
         
         </Route>
 

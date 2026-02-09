@@ -66,5 +66,11 @@ table {
 	font-family: 'JoseonGulim';
 }
 
+/* <Link> 컴포넌트 디자인 */
+a{
+	color: black;
+	text-decoration: none;
+}
+
 
 
