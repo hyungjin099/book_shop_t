@@ -15,3 +15,18 @@ export const insertMember = async (joinData) => {
     console.log('회원가입 axios 에러', e);
   }
 }
+
+
+/**
+ * 입력한 이메일이 중복인지 확인하는 api
+ * @param {string} memEmail 입력한 이메일
+ * @returns 
+ */
+export const checkId = async (memEmail) => {
+  try{
+    const response = await axios.get(`http://localhost:8080/members/checkId/${memEmail}`);
+    return response;
+  }catch(e){
+    console.log('이메일 중복 확인 axios 에러', e);
+  }
+}

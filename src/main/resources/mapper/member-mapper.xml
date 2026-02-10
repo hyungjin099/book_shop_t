@@ -34,7 +34,14 @@
             , #{addrDetail}
         )
     </insert>
-	
+
+    <!--중복 이메일 체크를 위한 쿼리-->
+    <select id="isUsableEmail" resultType="String">
+        SELECT MEM_EMAIL
+        FROM SHOP_MEMBER
+        WHERE MEM_EMAIL = #{memEmail}
+    </select>
+
 </mapper>
 
 
