@@ -1,0 +1,28 @@
+.container{
+  width: 300px;
+}
+
+.container > div{
+  margin-bottom: 1rem;
+}
+
+.container > div p{
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.tow_col{
+  display: flex;
+  gap: 0.7rem;
+}
+
+.btn_div > button{
+  width: 100%;
+}
+
+.container input,
+.container select,
+.container textarea
+{
+  width: 100%;
+}
