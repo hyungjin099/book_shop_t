@@ -4,6 +4,8 @@ import Button from '../../components/common/Button'
 import styles from './BookForm.module.css'
 import { getCateList } from '../../api/bookCateApi'
 import { insertBook } from '../../api/bookApi'
+import Select from '../../components/common/Select'
+import Textarea from '../../components/common/Textarea'
 
 const BookForm = () => {
   //조회한 카테고리 목록 데이터를 저장할  state 변수
@@ -145,7 +147,7 @@ const BookForm = () => {
     <div className={styles.container}>
       <div>
         <p>Book Category</p>
-        <select 
+        <Select 
           name='cateNum'
           value={bookData.cateNum}
           onChange={e => handleBookData(e)}
@@ -160,7 +162,7 @@ const BookForm = () => {
               )
             })
           }
-        </select>
+        </Select>
         {errors.cateNum && <p className='error'>{errors.cateNum}</p>}
       </div>
       <div>
@@ -193,12 +195,12 @@ const BookForm = () => {
       </div>
       <div>
         <p>Introduce</p>
-        <textarea 
+        <Textarea 
           cols={30} rows={5}
           name='bookIntro'
           value={bookData.bookIntro}
           onChange={e => handleBookData(e)}
-        ></textarea>
+        ></Textarea>
       </div>
       <div>
         <p>Publish Date</p>
