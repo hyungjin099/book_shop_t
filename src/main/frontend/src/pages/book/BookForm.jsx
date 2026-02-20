@@ -163,6 +163,16 @@ const BookForm = () => {
     const response = await insertBook(regForm);
     if(response.status == 201){
       alert('등록 성공');
+
+      //input태그 내용 초기화
+      setBookData({
+        bookTitle : '',
+        bookPrice : '',
+        author : '',
+        bookIntro : '',
+        publishDate : '',
+        cateNum : '0'
+      });
     }
     else{
       alert('등록 실패');
@@ -244,7 +254,7 @@ const BookForm = () => {
       <div>
         <input 
           type="file" 
-          //업로드할 파일을 선택할 떄 onChnage 이벤트 실행
+          //업로드할 파일을 선택할 떄 onChange 이벤트 실행
           onChange={e => {
             console.log(e.target.files);
             //선택한 파일의 이름을 console에 출력하는 코드
