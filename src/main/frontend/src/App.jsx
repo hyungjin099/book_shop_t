@@ -9,6 +9,7 @@ import Login from './pages/member/Login'
 import BookForm from './pages/book/BookForm'
 import WebStorage from './study/WebStorage'
 import { useState } from 'react'
+import BookDetail from './pages/book/BookDetail'
 
 function App() {
   
@@ -35,6 +36,9 @@ function App() {
 
           {/* 도서 목록 페이지, URL : localhost:5173 */}
           <Route path='' element={ <BookList/> }/>
+
+          {/* 도서 상세 페이지, URL : localhost:5173/detail/3 */}
+          <Route path='detail/:bookNum' element={ <BookDetail /> }/>
 
           {/* 회원 가입 페이지, URL : localhost:5173/join */}
           <Route path='join' element={ <Join /> }/>

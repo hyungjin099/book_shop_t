@@ -13,6 +13,9 @@
         <result column="BOOK_INTRO"     property="bookIntro"/>
         <result column="PUBLISH_DATE"   property="publishDate"/>
         <result column="CATE_NUM"       property="cateNum"/>
+        <!--<association property="" resultMap=""></association> 1 : 1 관계 설정-->
+        <!--<collection property="" resultMap=""></collection>   1 : N 관계 설정-->
+        <collection property="bookImgList" resultMap="com.green.book_shop_t.book.mapper.BookImgMapper.bookImg"></collection>
     </resultMap>
 
     <!--도서 등록-->
@@ -38,10 +41,13 @@
 
     <!--도서 목록 조회-->
     <select id="selectBookList" resultMap="book">
-        SELECT BOOK_NUM
+        SELECT B.BOOK_NUM
             , BOOK_TITLE
             , BOOK_PRICE
-        FROM SHOP_BOOK
+            , UPLOAD_FILE_NAME
+        FROM SHOP_BOOK B, BOOK_IMG I
+        WHERE B.BOOK_NUM = I.BOOK_NUM
+        AND IS_MAIN = 'Y'
         ORDER BY BOOK_NUM DESC
     </select>
 
@@ -49,6 +55,21 @@
         SELECT IFNULL(MAX(BOOK_NUM), 0) + 1
         FROM SHOP_BOOK
     </select>
+
+    <!--도서 상세 정보 조회-->
+    <select id="selectBookDetail" resultMap="book">
+        SELECT B.BOOK_NUM
+            , BOOK_TITLE
+            , BOOK_PRICE
+            , AUTHOR
+            , BOOK_INTRO
+            , UPLOAD_FILE_NAME
+            , IS_MAIN
+        FROM SHOP_BOOK B, BOOK_IMG I
+        WHERE B.BOOK_NUM = I.BOOK_NUM
+        AND B.BOOK_NUM = #{bookNum}
+    </select>
+
 
 </mapper>
 

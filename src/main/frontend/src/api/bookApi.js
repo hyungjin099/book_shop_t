@@ -27,3 +27,13 @@ export const getBookList = async () => {
     console.log('도서 목록 조회 axios 오류', e);
   }
 }
+
+//도서 상세 조회 api
+export const getBookDetail = async (bookNum) => {
+  try{
+    const response = await axios.get(`http://localhost:8080/books/${bookNum}`);
+    return response;
+  }catch(e){
+    console.log('상세 조회  axios 오류', e);
+  }
+}
