@@ -31,7 +31,7 @@ const Header = ({setLoginInfo}) => {
           :
           <>
             <li>{loginInfo_obj.memEmail}님 반갑습니다</li>
-            <li>장바구니</li>
+            <li>마이페이지</li>
             <li 
               style={{cursor :'pointer'}}
               onClick={e => {

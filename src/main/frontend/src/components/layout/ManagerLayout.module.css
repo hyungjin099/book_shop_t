@@ -1,6 +1,5 @@
 .container{
   width: 1200px;
-  border: 1px solid black;
   margin: 0 auto;
 }
 
@@ -10,12 +9,10 @@
 
 .side{
   width: 15%;
-  border: 1px solid black;
 }
 
 .content{
   width: 85%;
-  border: 1px solid black;
   padding: 1rem;
 }
 

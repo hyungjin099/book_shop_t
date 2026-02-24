@@ -88,7 +88,7 @@ const BookDetail = () => {
       const result = confirm('장바구니에 상품을 담았습니다.\n장바구니 페이지로 이동하시겠습니까?');
 
       if(result){
-        nav('/cart-list');
+        nav('/my/cart-list');
       }
     }
     else{
