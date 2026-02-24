@@ -10,6 +10,7 @@ import BookForm from './pages/book/BookForm'
 import WebStorage from './study/WebStorage'
 import { useState } from 'react'
 import BookDetail from './pages/book/BookDetail'
+import CartList from './pages/cart/CartList'
 
 function App() {
   
@@ -45,6 +46,9 @@ function App() {
 
           {/* 로그인 페이지, URL : localhost:5173/login */}
           <Route path='login' element={ <Login setLoginInfo={setLoginInfo} /> }/>
+
+          {/* 장바구니 목록 페이지, URL : localhost:5173/cart-list */}
+          <Route path='cart-list' element={ <CartList /> }/>
         
         </Route>
 
