@@ -1,5 +1,6 @@
 package com.green.book_shop_t.cart.dto;
 
+import com.green.book_shop_t.book.dto.BookDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,4 +15,5 @@ public class CartDTO {
   private int cartCnt;
   private LocalDateTime cartDate;
   private String memEmail;
+  private BookDTO bookDTO;
 }

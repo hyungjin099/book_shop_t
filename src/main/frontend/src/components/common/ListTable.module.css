@@ -1,0 +1,40 @@
+.list_table{
+  width: 100%;
+  text-align: center;
+}
+
+.list_table td{
+  padding: 0.5rem;
+  vertical-align: middle;
+}
+
+.list_table > thead > tr{
+  border-top: 1px solid #673de6;
+  border-bottom: 1px solid #673de6;
+  background-color: rgba(103, 61, 230, 0.8);
+  color: white;
+}
+
+.list_table > tbody > tr{
+  border-bottom: 1px solid rgba(200, 200, 200, 0.2);
+}
+
+.list_table > tbody > tr:nth-child(even){
+  background-color: rgba(200, 200, 200, 0.1);
+}
+
+.list_table > tbody > tr:hover{
+  background-color: rgba(200, 200, 200, 0.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+

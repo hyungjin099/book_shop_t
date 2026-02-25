@@ -4,6 +4,14 @@
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <!-- namespace에는 xml파일과 연결할 Mapper interface 파일명을 패키지를 포함하여 적어주세요 -->
 <mapper namespace="com.green.book_shop_t.cart.mapper.CartMapper">
+    <resultMap id="cart" type="com.green.book_shop_t.cart.dto.CartDTO">
+        <id     column="CART_NUM"   property="cartNum"/>
+        <result column="BOOK_NUM"   property="bookNum"/>
+        <result column="CART_CNT"   property="cartCnt"/>
+        <result column="MEM_EMAIL"  property="memEmail"/>
+        <result column="CART_DATE"  property="cartDate"/>
+        <association property="bookDTO" resultMap="com.green.book_shop_t.book.mapper.BookMapper.book"/>
+    </resultMap>
 
     <!--장바구니 등록-->
     <insert id="insertCart">
@@ -18,9 +26,48 @@
         )
     </insert>
 
+    <select id="selectCartList" resultMap="cart">
+        SELECT CART_NUM
+            , BOOK_TITLE
+            , BOOK_PRICE
+            , CART_CNT
+            , CART_DATE
+            , UPLOAD_FILE_NAME
+        FROM SHOP_CART C
+        INNER JOIN SHOP_BOOK B
+        ON C.BOOK_NUM = B.BOOK_NUM
+        INNER JOIN BOOK_IMG I
+        ON I.BOOK_NUM = B.BOOK_NUM
+        WHERE B.BOOK_NUM = I.BOOK_NUM
+        AND MEM_EMAIL = #{memEmail}
+        AND IS_MAIN = 'Y'
+        ORDER BY CART_DATE DESC
+    </select>
+
+    <!--현재 장바구니에서 상품이 있는지 확인하는 쿼리-->
+    <select id="isDuplicateBook" resultType="String">
+        SELECT MEM_EMAIL
+        FROM SHOP_CART
+        WHERE BOOK_NUM = #{bookNum}
+        AND MEM_EMAIL = #{memEmail}
+    </select>
+
+    <!--수량 변경 쿼리-->
+    <update id="updateCartBook">
+        UPDATE SHOP_CART
+        SET
+            CART_CNT = CART_CNT + #{cartCnt}
+            , CART_DATE = SYSDATE()
+        WHERE BOOK_NUM = #{bookNum}
+        AND MEM_EMAIL = #{memEmail}
+    </update>
+
+    <delete id="deleteCart">
+        DELETE FROM SHOP_CART
+        WHERE CART_NUM = #{cartNum}
+    </delete>
+
 </mapper>
-
-
 
 
 

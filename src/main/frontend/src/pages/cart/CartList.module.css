@@ -1,0 +1,10 @@
+.flex_div{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cnt_td > input{
+  width: 100%;
+  text-align: center;
+}
