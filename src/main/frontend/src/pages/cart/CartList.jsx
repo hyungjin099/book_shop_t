@@ -88,7 +88,11 @@ const CartList = () => {
                 <tr key={i}>
                   <td>{cartList.length - i}</td>
                   <td>
-                    <input type="checkbox" checked={true}/>
+                    <input 
+                      type="checkbox" 
+                      checked={true}
+                      value={cart.cartNum}
+                    />
                   </td>
                   <td>  
                     <div className={styles.flex_div}>
