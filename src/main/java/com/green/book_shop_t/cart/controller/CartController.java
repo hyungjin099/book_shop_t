@@ -56,6 +56,34 @@ public class CartController {
     }
   }
 
+  //장바구니 수량 변경 api
+  //(PUT) localhost:8080/carts/2
+  @PutMapping("/{cartNum}")
+  public ResponseEntity<?> updateCnt(@PathVariable("cartNum") int cartNum
+                                    , @RequestBody CartDTO cartDTO){
+    try{
+      cartDTO.setCartNum(cartNum);
+      cartService.updateCartCnt(cartDTO);
+      return ResponseEntity.status(HttpStatus.OK).build();
+    }catch(Exception e){
+      log.error("장바구니 수량 변경 api 오류", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+  //장바구니에서 선택한 장바구니 상품 삭제 api
+  //(DELETE) localhost:8080/del-carts
+  @DeleteMapping("/del-carts")
+  public ResponseEntity<?> deleteCarts(@RequestParam("cartNumList") List<Integer> cartNumList){
+    try{
+      cartService.deleteCarts(cartNumList);
+      return ResponseEntity.status(HttpStatus.OK).build();
+    }catch(Exception e){
+      log.error("장바구니 선택 삭제 중 오류", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
 }
 
 

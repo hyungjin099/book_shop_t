@@ -67,6 +67,21 @@
         WHERE CART_NUM = #{cartNum}
     </delete>
 
+    <delete id="deleteCarts">
+        DELETE FROM SHOP_CART
+        WHERE CART_NUM IN
+        <foreach collection="cartNumList" item="cartNum" separator="," open="(" close=")">
+            #{cartNum}
+        </foreach>
+    </delete>
+
+    <update id="updateCartCnt">
+        UPDATE SHOP_CART
+        SET
+            CART_CNT = #{cartCnt}
+        WHERE CART_NUM = #{cartNum}
+    </update>
+
 </mapper>
 
 

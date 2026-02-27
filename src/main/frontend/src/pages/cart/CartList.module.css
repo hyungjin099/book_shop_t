@@ -8,3 +8,17 @@
   width: 100%;
   text-align: center;
 }
+
+.price_p{
+  margin: 1rem 0px;
+  text-align: right;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.btn_div{
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+}
+

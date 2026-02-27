@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ListTable from '../../components/common/ListTable'
-import { delCart, getCartList } from '../../api/cartApi';
+import { delCart, delCarts, getCartList, updateCnt } from '../../api/cartApi';
 import Button from '../../components/common/Button'
 import Input from '../../components/common/Input'
 import dayjs from 'dayjs';
@@ -85,6 +85,31 @@ const CartList = () => {
     setTotalPrice(sum);
   }, [cartNumList]);
 
+  //장바구니 수량 변경 함수
+  const updateCartCnt = async (cartNum, cartCnt) => {
+    //입력한 수량(cartCnt)가 숫자인지 확인
+
+
+    await updateCnt(cartNum, cartCnt);
+    getList();
+  }
+
+  //장바구니 선택 삭제
+  const removeCarts = async () => {
+    //정말 삭제할지 물어봄
+    const result = confirm('장바구니에서 도서를 삭제할까요?');
+    if(!result) return ;
+    
+    //삭제할 상품을 선택했는지 확인
+    if(cartNumList.length === 0){
+      alert('삭제할 도서가 선택되지 않았습니다');
+      return;
+    }
+
+    await delCarts(cartNumList);
+    getList();
+  }
+
   return (
     <div>
       <div>
@@ -159,7 +184,10 @@ const CartList = () => {
                   </td>
                   <td>{cart.bookDTO.bookPrice.toLocaleString()}원</td>
                   <td className={styles.cnt_td}>
-                    <Input value={cart.cartCnt}/>
+                    <Input 
+                      value={cart.cartCnt}
+                      onChange={e => updateCartCnt(cart.cartNum, e.target.value)}
+                    />
                   </td>
                   <td>{(cart.bookDTO.bookPrice * cart.cartCnt).toLocaleString()}원</td>
                   {/* <td>{cart.cartDate}</td> */}
@@ -178,8 +206,16 @@ const CartList = () => {
           </tbody>
         </ListTable>
       </div>
-      <div>{totalPrice.toLocaleString()}원</div>
-      <div></div>
+      <p className={styles.price_p}>
+        총 결제 금액 : 
+        {totalPrice.toLocaleString()}원</p>
+      <div className={styles.btn_div}>
+        <Button 
+          title='선택 삭제' size='medium'
+          onClick={e => removeCarts()}
+        />
+        <Button title='선택 구매' size='medium'/>
+      </div>
     </div>
   )
 }
