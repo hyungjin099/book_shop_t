@@ -25,6 +25,7 @@ public class BuyController {
   @PostMapping("")
   public ResponseEntity<?> addBuy(@RequestBody BuyDTO buyDTO){
     try{
+      System.out.println(buyDTO);
       buyService.insertBuy(buyDTO);
       return ResponseEntity.status(HttpStatus.CREATED).build();
     }catch(Exception e){

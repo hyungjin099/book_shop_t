@@ -15,14 +15,12 @@ public class BuyService {
   //트랜젝션
   //구매 정보 등록
   @Transactional(rollbackFor = Exception.class)
-  public void insertBuy(BuyDTO buyDTO, BuyDetailDTO buyDetailDTO){
+  public void insertBuy(BuyDTO buyDTO){
     //SHOP_BUY INSERT
     buyMapper.insertBuy(buyDTO);
 
-    buyDetailDTO.setBuyNum(buyDTO.getBuyNum());
-
     //BUY_DETAIL INSERT
-    buyMapper.insertBuyDetail(buyDetailDTO);
+    buyMapper.insertBuyDetail(buyDTO);
   }
 
 }

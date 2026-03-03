@@ -38,11 +38,15 @@
             BOOK_NUM
             , BUY_CNT
             , BUY_NUM
-        ) VALUES (
-            #{bookNum}
-            , #{buyCnt}
+        ) VALUES
+        <foreach collection="detailList" item="detail" separator=", ">
+        (
+            #{detail.bookNum}
+            , #{detail.buyCnt}
             , #{buyNum}
         )
+        </foreach>
+
     </insert>
 
 

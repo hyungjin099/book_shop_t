@@ -5,6 +5,7 @@ import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 import { getBookDetail } from '../../api/bookApi';
 import { regCart } from '../../api/cartApi';
+import { insertBuy } from '../../api/buyApi';
 
 const BookDetail = () => {
   const nav = useNavigate();
@@ -101,15 +102,19 @@ const BookDetail = () => {
     //로그인한 회원의 이메일
     const memEmail = JSON.parse(sessionStorage.getItem('loginInfo')).memEmail;
        
-
     //자바로 가져갈 데이터
     const data = {
       buyPrice : cntAndPrice.price,
       memEmail : memEmail,
-      bookNum : bookInfo.bookNum,
-      buyCnt : cntAndPrice.cnt,
-      buyNum : ''
+      detailList : [
+        {
+          bookNum : bookInfo.bookNum,
+          buyCnt : cntAndPrice.cnt
+        }
+      ]
     }
+
+    insertBuy(data);
 
   }
 

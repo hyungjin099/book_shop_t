@@ -10,5 +10,5 @@ public interface BuyMapper {
   void insertBuy(BuyDTO buyDTO);
 
   //BUY_DETAIL 테이블 INSERT
-  void insertBuyDetail(BuyDetailDTO buyDetailDTO);
+  void insertBuyDetail(BuyDTO buyDTO);
 }
