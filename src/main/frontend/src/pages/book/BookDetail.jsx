@@ -94,6 +94,22 @@ const BookDetail = () => {
     else{
       alert('예기치 않은 오류가 발생했습니다');
     }
+  }
+
+  //구매 버튼 클릭 시 실행 함수
+  const regBuy = () => {
+    //로그인한 회원의 이메일
+    const memEmail = JSON.parse(sessionStorage.getItem('loginInfo')).memEmail;
+       
+
+    //자바로 가져갈 데이터
+    const data = {
+      buyPrice : cntAndPrice.price,
+      memEmail : memEmail,
+      bookNum : bookInfo.bookNum,
+      buyCnt : cntAndPrice.cnt,
+      buyNum : ''
+    }
 
   }
 
@@ -132,7 +148,10 @@ const BookDetail = () => {
 
             <div className={styles.btn_div}>
               <Button title='장바구니에 담기' variant='green' onClick={e => addCart()}/>
-              <Button title='바구 구매'/>
+              <Button 
+                title='바로 구매'
+                onClick={e => regBuy()}
+              />
             </div>
           </div>
         </div>
