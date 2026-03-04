@@ -5,6 +5,7 @@ import Button from '../../components/common/Button'
 import Input from '../../components/common/Input'
 import dayjs from 'dayjs';
 import styles from './CartList.module.css'
+import { insertBuy } from '../../api/buyApi';
 
 const CartList = () => {
   //조회한 장바구니 목록을 저장할 state 변수
@@ -16,6 +17,8 @@ const CartList = () => {
   //체크한 체크박스의 value를 저장할 state 변수
   //해당 변수에는 cartNum이 저장됨
   const [cartNumList, setCartNumList] = useState([]);
+
+  console.log('cartNumList = ', cartNumList);
 
   //제목줄의 체크박스 체크여부를 저장할 state 변수
   const [isChecked, setIsChecked] = useState(true);
@@ -109,6 +112,59 @@ const CartList = () => {
     await delCarts(cartNumList);
     getList();
   }
+
+  //선택 도서 구매
+  const regBuys = async () => {
+    //로그인 여부 확인
+    const loginInfo = sessionStorage.getItem('loginInfo');
+    const loginInfo_obj = JSON.parse(loginInfo);
+
+    if(loginInfo == null) {
+      alert('로그인 필수!!!');
+      return ;
+    }
+
+    //구매 도서 선택 여부 확인
+    if(cartNumList.length === 0){
+      alert('구매할 도서를 선택하세요');
+      return ;
+    }
+
+    //아래 data 변수의 detailList 키에 들어갈 데이터 생성
+    const detailList = [];
+
+    //체크한 도서수만큼 반복
+    for(let i = 0 ; i < cartNumList.length ; i++){
+      const detailData = {
+        bookNum : cartList.filter(e => e.cartNum === cartNumList[i]).map(e => e.bookNum)[0],
+        buyCnt : cartList.filter(e => e.cartNum === cartNumList[i]).map(e => e.cartCnt)[0]
+      };
+
+      detailList.push(detailData);
+    }
+
+    //자바로 가져갈 데이터
+    const data = {
+      buyPrice : totalPrice,
+      memEmail : loginInfo_obj.memEmail,
+      detailList : detailList
+    }
+
+    console.log('자바로 가져갈 데이터 : ', data);
+
+    //SHOP_BUY, BUY_DETAIL 테이블에 데이터 INSERT
+    await insertBuy(data);
+
+    alert(`선택하신 ${cartNumList.length}개의 상품을 구매했습니다.`);
+
+    //장바구니에서 구매한 도서는 삭제
+    await delCarts(cartNumList);
+
+    //화면 리렌더링을 위해 장바구니 목록 조회
+    await getList();
+
+  }
+
 
   return (
     <div>
@@ -214,7 +270,11 @@ const CartList = () => {
           title='선택 삭제' size='medium'
           onClick={e => removeCarts()}
         />
-        <Button title='선택 구매' size='medium'/>
+        <Button 
+          title='선택 구매' 
+          size='medium'
+          onClick={e => regBuys()}
+        />
       </div>
     </div>
   )

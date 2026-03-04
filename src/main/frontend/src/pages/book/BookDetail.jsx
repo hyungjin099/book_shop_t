@@ -98,7 +98,7 @@ const BookDetail = () => {
   }
 
   //구매 버튼 클릭 시 실행 함수
-  const regBuy = () => {
+  const regBuy = async () => {
     //로그인한 회원의 이메일
     const memEmail = JSON.parse(sessionStorage.getItem('loginInfo')).memEmail;
        
@@ -114,7 +114,12 @@ const BookDetail = () => {
       ]
     }
 
-    insertBuy(data);
+    await insertBuy(data);
+    const result = confirm('구매 완료!!\n구매목록페이지로 이동할까요?');
+    if(result){
+      //구매 목록 페이지로 이동
+      //nav();
+    }
 
   }
 

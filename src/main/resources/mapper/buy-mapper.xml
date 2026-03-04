@@ -9,6 +9,7 @@
         <result column="BUY_PRICE"  property="buyPrice"/>
         <result column="MEM_EMAIL"  property="memEmail"/>
         <result column="BUY_DATE"   property="buyDate"/>
+        <collection property="detailList" resultMap="buyDetail"/>
     </resultMap>
 
     <resultMap id="buyDetail" type="com.green.book_shop_t.buy.dto.BuyDetailDTO">
@@ -16,6 +17,7 @@
         <result column="BOOK_NUM"           property="bookNum"/>
         <result column="BUY_CNT"            property="buyCnt"/>
         <result column="BUY_NUM"            property="buyNum"/>
+        <association property="bookDTO" resultMap="com.green.book_shop_t.book.mapper.BookMapper.book"/>
     </resultMap>
 
     <!--구매 등록 (SHOP_BUY)-->
@@ -46,8 +48,28 @@
             , #{buyNum}
         )
         </foreach>
-
     </insert>
+
+    <!--구매목록조회(회원 기능)-->
+    <select id="selectBuyList" resultMap="buy">
+        SELECT B.BUY_NUM
+            , BUY_PRICE
+            , BUY_DATE
+            , BUY_CNT
+            , BOOK_TITLE
+            , BOOK_PRICE
+            , UPLOAD_FILE_NAME
+        FROM SHOP_BUY B
+        INNER JOIN BUY_DETAIL D
+        ON B.BUY_NUM = D.BUY_NUM
+        INNER JOIN SHOP_BOOK BOOK
+        ON D.BOOK_NUM = BOOK.BOOK_NUM
+        INNER JOIN BOOK_IMG I
+        ON I.BOOK_NUM = BOOK.BOOK_NUM
+        WHERE IS_MAIN = 'Y'
+        AND MEM_EMAIL = #{memEmail}
+        ORDER BY BUY_DATE DESC
+    </select>
 
 
 </mapper>

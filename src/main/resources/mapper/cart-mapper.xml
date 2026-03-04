@@ -33,6 +33,7 @@
             , CART_CNT
             , CART_DATE
             , UPLOAD_FILE_NAME
+            , C.BOOK_NUM
         FROM SHOP_CART C
         INNER JOIN SHOP_BOOK B
         ON C.BOOK_NUM = B.BOOK_NUM
