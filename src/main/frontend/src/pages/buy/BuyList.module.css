@@ -1,0 +1,30 @@
+.container{
+
+}
+
+.container > div{
+  margin-bottom: 1rem;
+}
+
+.buyInfo{
+
+}
+
+.buy_header{
+  display: flex;
+  gap: 1rem;
+  background-color: rgba(103, 61, 230, 1);
+  color: white;
+  padding: 1rem;
+}
+
+.buy_content{
+  padding: 1rem;
+  background-color: rgba(103, 61, 230, 0.3);
+}
+
+.not_buy{
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 5rem;
+}

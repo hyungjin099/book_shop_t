@@ -8,10 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -30,6 +29,19 @@ public class BuyController {
       return ResponseEntity.status(HttpStatus.CREATED).build();
     }catch(Exception e){
       log.error("구매 정보 등록 중 api 오류", e);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
+  //구매 목록 조회
+  //(GET) localhost:8080/buys/abc
+  @GetMapping("/{memEmail}")
+  public ResponseEntity<?> getBuyList(@PathVariable("memEmail") String memEmail){
+    try{
+      List<BuyDTO> list = buyService.selectBuyList(memEmail);
+      return ResponseEntity.status(HttpStatus.OK).body(list);
+    }catch (Exception e){
+      log.error("구매 목록 조회 api 오류", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }
