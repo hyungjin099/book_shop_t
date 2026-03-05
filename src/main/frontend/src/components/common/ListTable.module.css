@@ -17,14 +17,15 @@
 
 .list_table > tbody > tr{
   border-bottom: 1px solid rgba(200, 200, 200, 0.2);
+  background-color: white;
 }
 
 .list_table > tbody > tr:nth-child(even){
-  background-color: rgba(200, 200, 200, 0.1);
+  background-color: rgba(250, 250, 250, 1);
 }
 
 .list_table > tbody > tr:hover{
-  background-color: rgba(200, 200, 200, 0.2);
+  background-color: rgba(240, 240, 240, 1);
 }
 
 

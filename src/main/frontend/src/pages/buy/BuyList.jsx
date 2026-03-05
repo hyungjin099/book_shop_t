@@ -69,12 +69,19 @@ const BuyList = () => {
                     return (
                       <tr key={j}>
                         <td>{buy.detailList.length - j}</td>
-                        <td>
-                          {detail.bookDTO.bookTitle}
+                        <td className={styles.flex_td}>
+                          <img src={`http://localhost:8080/upload/${detail.bookDTO.bookImgList[0].uploadFileName}`} />
+                         <p>{detail.bookDTO.bookTitle}</p>
                         </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                          {detail.bookDTO.bookPrice.toLocaleString()}원
+                        </td>
+                        <td>
+                          {detail.buyCnt}
+                        </td>
+                        <td>
+                          {(detail.bookDTO.bookPrice * detail.buyCnt).toLocaleString()}원
+                        </td>
                       </tr>
                     )
                   })
