@@ -2,6 +2,7 @@ package com.green.book_shop_t.buy.mapper;
 
 import com.green.book_shop_t.buy.dto.BuyDTO;
 import com.green.book_shop_t.buy.dto.BuyDetailDTO;
+import com.green.book_shop_t.buy.dto.SaleInfoDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public interface BuyMapper {
 
   //구매목록조회
   List<BuyDTO> selectBuyList(String memEmail);
+
+  //오늘과 이 달의 주문건수 및 매출액 조회
+  SaleInfoDTO selectSaleInfo();
 
 }
 

@@ -9,6 +9,10 @@ const ManageSide = () => {
   return (
     <div className={styles.container}>
       <div>
+        <h5>관리자 홈</h5>
+      </div>
+
+      <div>
         <h5>상품관리</h5>
         <ul>
           <li>

@@ -48,8 +48,8 @@ const Login = ({setLoginInfo}) => {
       setLoginInfo(loginInfo);
 
       //일반유저 ->도서 목록 페이지로 이동
-      //매니저 -> 상품 등록 페이지로 이동
-      nav(loginInfo.memRole === 'USER' ? '/' : '/manage/book-form');
+      //매니저 -> 관리자 홈(대시보드) 페이지로 이동
+      nav(loginInfo.memRole === 'USER' ? '/' : '/manage/home');
 
     }else{
       alert('ID, PW을 확인하세요.');

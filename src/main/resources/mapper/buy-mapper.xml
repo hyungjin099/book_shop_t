@@ -20,6 +20,13 @@
         <association property="bookDTO" resultMap="com.green.book_shop_t.book.mapper.BookMapper.book"/>
     </resultMap>
 
+    <resultMap id="saleInfo" type="com.green.book_shop_t.buy.dto.SaleInfoDTO">
+        <result column="SALE_CNT_TODAY" property="saleCntToday"/>
+        <result column="SALE_CNT_MONTH" property="saleCntMonth"/>
+        <result column="SALE_TODAY"     property="saleToday"/>
+        <result column="SALE_MONTH"     property="saleMonth"/>
+    </resultMap>
+
     <!--구매 등록 (SHOP_BUY)-->
     <!--useGeneratedKeys="true" -> auto_increment된 key를 insert 시 사용하겠다는 의미-->
     <!--keyProperty="buyNum" -> 이 쿼리의 빈값을 채우기 위해 가져온 객체(BuyDTO)의 -->
@@ -69,6 +76,35 @@
         WHERE IS_MAIN = 'Y'
         AND MEM_EMAIL = #{memEmail}
         ORDER BY BUY_DATE DESC
+    </select>
+
+    <!--오늘과 이 달의 주문건수 및 매출액 조회-->
+    <select id="selectSaleInfo" resultMap="saleInfo">
+        SELECT
+        (
+            SELECT COUNT(BUY_NUM)
+            FROM SHOP_BUY
+            WHERE DATE(BUY_DATE) = CURRENT_DATE()
+        ) AS SALE_CNT_TODAY,
+        (
+            SELECT COUNT(BUY_NUM)
+            FROM SHOP_BUY
+            WHERE DATE(BUY_DATE)
+            BETWEEN CONCAT(TO_CHAR(CURRENT_DATE(), 'YYYY-MM'), '-01')
+            AND CURRENT_DATE()
+        ) AS SALE_CNT_MONTH,
+        (
+            SELECT SUM(BUY_PRICE)
+            FROM SHOP_BUY
+            WHERE DATE(BUY_DATE) = CURRENT_DATE()
+        ) AS SALE_TODAY,
+        (
+            SELECT SUM(BUY_PRICE)
+            FROM SHOP_BUY
+            WHERE DATE(BUY_DATE)
+            BETWEEN CONCAT(TO_CHAR(CURRENT_DATE(), 'YYYY-MM'), '-01')
+            AND CURRENT_DATE()
+        ) AS SALE_MONTH
     </select>
 
 

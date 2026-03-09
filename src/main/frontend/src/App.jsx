@@ -15,6 +15,7 @@ import UserLayout from './components/layout/UserLayout'
 import CheckboxTest from './study/CheckboxTest'
 import BuyList from './pages/buy/BuyList'
 import MyPage from './pages/member/MyPage'
+import Dashboard from './pages/admin/Dashboard'
 
 function App() {
   
@@ -73,6 +74,9 @@ function App() {
           path='/manage' 
           element={ <ManagerLayout setLoginInfo={setLoginInfo}/> 
         }>
+
+          {/* 관리자 홈 페이지, URL : localhost:5173/manage/home */}
+          <Route path='home' element={ <Dashboard /> }/>
 
           {/* 상품 등록 페이지, URL : localhost:5173/manage/book-form */}
           <Route path='book-form' element={ <BookForm /> }/>
